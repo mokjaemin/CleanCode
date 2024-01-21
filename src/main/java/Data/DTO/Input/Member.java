@@ -1,4 +1,4 @@
-package Data.DTO;
+package Data.DTO.Input;
 
 
 import java.util.Objects;

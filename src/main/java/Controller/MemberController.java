@@ -1,7 +1,8 @@
 package Controller;
 
-import Data.DTO.LoginMember;
-import Data.DTO.Member;
+import Data.DTO.Input.LoginMember;
+import Data.DTO.Input.Member;
+import Data.DTO.Output.LoginedMemberToken;
 import Service.MemberService;
 
 public class MemberController {
@@ -16,8 +17,8 @@ public class MemberController {
         return memberService.postMember(member);
     }
 
-    public String loginMember(LoginMember loginMember){
-        return memberService.loginMember(loginMember);
+    public LoginedMemberToken loginMember(LoginMember loginMember){
+        return memberService.getLoginMemberToken(loginMember);
     }
 
 }

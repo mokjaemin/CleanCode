@@ -1,8 +1,7 @@
 package Data.Entity;
 
 
-import Controller.MemberController;
-import Data.DTO.Member;
+import Data.DTO.Input.Member;
 
 public class MemberEntity {
 

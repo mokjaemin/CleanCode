@@ -1,8 +1,8 @@
 import Controller.MemberController;
 import DAO.Impl.MemberDAOImpl;
 import DAO.MemberDAO;
-import Data.DTO.LoginMember;
-import Data.DTO.Member;
+import Data.DTO.Input.LoginMember;
+import Data.DTO.Input.Member;
 import DataBase.MemberDB;
 import Service.Impl.MemberServiceImpl;
 import Service.MemberService;
@@ -26,10 +26,17 @@ public class MemberTest {
         System.out.println();
     }
 
-    public static void PostMemberFailExistedID(){
+    public static void PostMemberFail_ExistedID(){
         System.out.println("Test Method : Post Member Fail : Existed ID");
-        System.out.println(memberController.postMember(memberSample));
-        System.out.println();
+        try{
+            System.out.println(memberController.postMember(memberSample));
+        }
+        catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+        finally {
+            System.out.println();
+        }
     }
 
     public static void LoginMemberSuccess(){
@@ -39,25 +46,39 @@ public class MemberTest {
         System.out.println();
     }
 
-    public static void LoginMemberFailNoExistedID(){
+    public static void LoginMemberFail_NoExistedID(){
         System.out.println("Test Method : Login Member Fail : No Exited ID");
-        LoginMember loginMemberSample = LoginMember.builder().id("WrongID").passWord(memberSample.getPassWord()).build();
-        System.out.println(memberController.loginMember(loginMemberSample));
-        System.out.println();
+        try {
+            LoginMember loginMemberSample = LoginMember.builder().id("WrongID").passWord(memberSample.getPassWord()).build();
+            System.out.println(memberController.loginMember(loginMemberSample));
+        }
+        catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+        finally {
+            System.out.println();
+        }
     }
 
-    public static void LoginMemberFailWrongPassword(){
+    public static void LoginMemberFail_WrongPassword(){
         System.out.println("Test Method : Login Member Fail : Wrong Password");
-        LoginMember loginMemberSample = LoginMember.builder().id(memberSample.getId()).passWord("WrongPWD").build();
-        System.out.println(memberController.loginMember(loginMemberSample));
-        System.out.println();
+        try{
+            LoginMember loginMemberSample = LoginMember.builder().id(memberSample.getId()).passWord("WrongPWD").build();
+            System.out.println(memberController.loginMember(loginMemberSample));
+        }
+        catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+        finally {
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
         PostMemberSuccess();
-        PostMemberFailExistedID();
+        PostMemberFail_ExistedID();
         LoginMemberSuccess();
-        LoginMemberFailNoExistedID();
-        LoginMemberFailWrongPassword();
+        LoginMemberFail_NoExistedID();
+        LoginMemberFail_WrongPassword();
     }
 }

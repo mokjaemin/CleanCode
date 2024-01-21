@@ -1,6 +1,6 @@
 package DataBase;
 
-import Data.DTO.LoginMember;
+import Data.DTO.Input.LoginMember;
 import Data.Entity.MemberEntity;
 
 import java.util.ArrayList;

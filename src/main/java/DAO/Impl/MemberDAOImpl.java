@@ -1,9 +1,12 @@
 package DAO.Impl;
 
 import DAO.MemberDAO;
-import Data.DTO.LoginMember;
+import Data.DTO.Input.LoginMember;
 import Data.Entity.MemberEntity;
 import DataBase.MemberDB;
+import Exception.ExistedIDException;
+import Exception.NoExistedIDException;
+import Exception.WrongPassWordException;
 
 public class MemberDAOImpl implements MemberDAO {
 
@@ -14,24 +17,24 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public String postMemberEntity(MemberEntity memberEntity) {
+    public String postMemberEntity(MemberEntity memberEntity) throws RuntimeException {
         if(memberDB.isIDExisted(memberEntity.getId())){
-            return "이미 존재하는 아이디입니다.";
+            throw new ExistedIDException();
         }
         memberDB.postMemberEntity(memberEntity);
         return "회원가입 성공";
     }
 
     @Override
-    public String loginMember(LoginMember loginMember) {
+    public boolean isMemberLogined(LoginMember loginMember) throws RuntimeException {
         LoginMember savedLoginMember = memberDB.getLoginMember(loginMember);
         if(savedLoginMember == null){
-            return "존재하지 않는 아이디입니다.";
+            throw new NoExistedIDException();
         }
         if(!savedLoginMember.getPassWord().equals(loginMember.getPassWord())){
-            return "비밀번호가 틀립니다.";
+            throw new WrongPassWordException();
         }
-        return "로그인 성공";
+        return true;
     }
 
 

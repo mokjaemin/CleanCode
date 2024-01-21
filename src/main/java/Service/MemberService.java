@@ -1,11 +1,12 @@
 package Service;
 
-import Data.DTO.LoginMember;
-import Data.DTO.Member;
+import Data.DTO.Input.LoginMember;
+import Data.DTO.Input.Member;
+import Data.DTO.Output.LoginedMemberToken;
 
 public interface MemberService {
 
     String postMember(Member member);
-    String loginMember(LoginMember loginMember);
+    LoginedMemberToken getLoginMemberToken(LoginMember loginMember);
 
 }
