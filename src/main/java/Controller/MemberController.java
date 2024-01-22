@@ -3,6 +3,7 @@ package Controller;
 import Data.DTO.Input.LoginMember;
 import Data.DTO.Input.Member;
 import Data.DTO.Output.LoginedMemberToken;
+import Data.Entity.MemberEntity;
 import Service.MemberService;
 
 public class MemberController {
@@ -13,12 +14,21 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    public String postMember(Member member){
-        return memberService.postMember(member);
+    public String registerMember(Member member){
+        MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
+        String registerMemberResult = memberService.registerMemberEntity(memberEntity);
+        return registerMemberResult;
     }
 
     public LoginedMemberToken loginMember(LoginMember loginMember){
-        return memberService.getLoginMemberToken(loginMember);
+        LoginedMemberToken loginedMemberToken = memberService.createLoginMemberToken(loginMember);
+        return loginedMemberToken;
+    }
+
+    public String updateMember(Member member){
+        MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
+        String updateMemberResult = memberService.updateMemberEntity(memberEntity);
+        return updateMemberResult;
     }
 
 }

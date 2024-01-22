@@ -1,3 +1,5 @@
+package APITest;
+
 import Controller.MemberController;
 import DAO.Impl.MemberDAOImpl;
 import DAO.MemberDAO;
@@ -7,7 +9,7 @@ import DataBase.MemberDB;
 import Service.Impl.MemberServiceImpl;
 import Service.MemberService;
 
-public class MemberTest {
+public class MemberAPITest {
 
     private static Member memberSample = Member.builder().id("id1")
             .passWord("pwd1").name("name1").phoneNumber("number1")
@@ -20,16 +22,26 @@ public class MemberTest {
     private static MemberController memberController = new MemberController(memberService);
 
 
-    public static void PostMemberSuccess(){
-        System.out.println("Test Method : Post Member Success");
-        System.out.println(memberController.postMember(memberSample));
+    // Test Main
+    public static void main(String[] args) {
+        RegisterMemberSuccess();
+        RegisterMemberFail_ExistedID();
+        LoginMemberSuccess();
+        LoginMemberFail_NoExistedID();
+        LoginMemberFail_WrongPassword();
+        UpdateMemberSuccess();
+    }
+
+    public static void RegisterMemberSuccess(){
+        System.out.println("Test Method : Register Member Success");
+        System.out.println(memberController.registerMember(memberSample));
         System.out.println();
     }
 
-    public static void PostMemberFail_ExistedID(){
-        System.out.println("Test Method : Post Member Fail : Existed ID");
+    public static void RegisterMemberFail_ExistedID(){
+        System.out.println("Test Method : Register Member Fail : Existed ID");
         try{
-            System.out.println(memberController.postMember(memberSample));
+            System.out.println(memberController.registerMember(memberSample));
         }
         catch (RuntimeException e){
             System.out.println(e.getMessage());
@@ -74,11 +86,9 @@ public class MemberTest {
         }
     }
 
-    public static void main(String[] args) {
-        PostMemberSuccess();
-        PostMemberFail_ExistedID();
-        LoginMemberSuccess();
-        LoginMemberFail_NoExistedID();
-        LoginMemberFail_WrongPassword();
+    public static void UpdateMemberSuccess(){
+        System.out.println("Test Method : Update Member Success");
+        System.out.println(memberController.updateMember(memberSample));
+        System.out.println();
     }
 }

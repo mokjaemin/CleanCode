@@ -1,6 +1,6 @@
 package Exception;
 
-public class ExistedIDException extends RuntimeException {
+public class RegisteredIDException extends RuntimeException {
 
     public String message = "이미 존재하는 아이디입니다.";
 

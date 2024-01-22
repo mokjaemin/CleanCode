@@ -17,15 +17,27 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String postMember(Member member) {
-        return memberDAO.postMemberEntity(MemberEntity.toMemberEntity(member));
+    public String registerMemberEntity(MemberEntity memberEntity) {
+        if(memberDAO.isMemberRegisterValid(memberEntity)){
+            return "success";
+        }
+        else{
+            throw new RuntimeException("회원가입 중 서버 오류 발생");
+        }
     }
 
     @Override
-    public LoginedMemberToken getLoginMemberToken(LoginMember loginMember) throws RuntimeException {
-        if(memberDAO.isMemberLogined(loginMember)){
+    public LoginedMemberToken createLoginMemberToken(LoginMember loginMember){
+        if(memberDAO.isMemberLoginValid(loginMember)){
             return JwtUtil.getLoginedMemberToken();
         }
-        throw new RuntimeException("로그인 중 서버 오류 발생");
+        else{
+            throw new RuntimeException("로그인 중 서버 오류 발생");
+        }
+    }
+
+    @Override
+    public String updateMemberEntity(MemberEntity memberEntity) {
+        return memberDAO.updateMemberEntity(memberEntity);
     }
 }

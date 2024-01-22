@@ -1,2 +1,2 @@
-MemberTest.java
- MemberTest
+APITest/MemberAPITest.java
+ APITest.MemberAPITest

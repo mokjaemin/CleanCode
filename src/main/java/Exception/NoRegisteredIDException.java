@@ -1,6 +1,6 @@
 package Exception;
 
-public class NoExistedIDException extends RuntimeException{
+public class NoRegisteredIDException extends RuntimeException{
 
     public String message = "아이디가 존재하지 않습니다.";
 

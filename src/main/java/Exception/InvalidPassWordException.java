@@ -1,6 +1,6 @@
 package Exception;
 
-public class WrongPassWordException extends RuntimeException{
+public class InvalidPassWordException extends RuntimeException{
 
     public String message = "비밀번호가 일치하지 않습니다.";
 

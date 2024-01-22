@@ -4,9 +4,9 @@ import DAO.MemberDAO;
 import Data.DTO.Input.LoginMember;
 import Data.Entity.MemberEntity;
 import DataBase.MemberDB;
-import Exception.ExistedIDException;
-import Exception.NoExistedIDException;
-import Exception.WrongPassWordException;
+import Exception.RegisteredIDException;
+import Exception.NoRegisteredIDException;
+import Exception.InvalidPassWordException;
 
 public class MemberDAOImpl implements MemberDAO {
 
@@ -17,24 +17,35 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public String postMemberEntity(MemberEntity memberEntity) throws RuntimeException {
-        if(memberDB.isIDExisted(memberEntity.getId())){
-            throw new ExistedIDException();
+    public boolean isMemberRegisterValid(MemberEntity memberEntity) {
+        if(memberDB.isIDRegistered(memberEntity.getId())){
+            throw new RegisteredIDException();
         }
-        memberDB.postMemberEntity(memberEntity);
-        return "회원가입 성공";
+        else{
+            memberDB.registerMemberEntity(memberEntity);
+            return true;
+        }
     }
 
     @Override
-    public boolean isMemberLogined(LoginMember loginMember) throws RuntimeException {
-        LoginMember savedLoginMember = memberDB.getLoginMember(loginMember);
-        if(savedLoginMember == null){
-            throw new NoExistedIDException();
+    public boolean isMemberLoginValid(LoginMember loginMember) {
+        LoginMember registeredLoginMember = memberDB.getRegisteredLoginMember(loginMember);
+        if(registeredLoginMember == null){
+            throw new NoRegisteredIDException();
         }
-        if(!savedLoginMember.getPassWord().equals(loginMember.getPassWord())){
-            throw new WrongPassWordException();
+        else if(!registeredLoginMember.getPassWord().equals(loginMember.getPassWord())){
+            throw new InvalidPassWordException();
         }
-        return true;
+        else{
+            return true;
+        }
+    }
+
+    @Override
+    public String updateMemberEntity(MemberEntity memberEntity) {
+        MemberDB.removeMemberEntityByID(memberEntity.getId());
+        MemberDB.registerMemberEntity(memberEntity);
+        return "success";
     }
 
 
