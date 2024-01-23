@@ -27,8 +27,8 @@ public class MemberController {
 
     public String updateMember(Member member){
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
-        String updateMemberResult = memberService.updateMemberEntity(memberEntity);
-        return updateMemberResult;
+        String updateMemberEntityResult = memberService.updateMemberEntity(memberEntity);
+        return updateMemberEntityResult;
     }
 
 }

@@ -38,6 +38,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public String updateMemberEntity(MemberEntity memberEntity) {
-        return memberDAO.updateMemberEntity(memberEntity);
+        String updateMemebrEntityResult = memberDAO.updateMemberEntity(memberEntity);
+        return updateMemebrEntityResult;
     }
 }
