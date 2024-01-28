@@ -3,6 +3,7 @@ package APITest;
 import Controller.MemberController;
 import DAO.Impl.MemberDAOImpl;
 import DAO.MemberDAO;
+import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
 import Data.DTO.Input.Member;
 import DataBase.MemberDB;
@@ -14,6 +15,7 @@ public class MemberAPITest {
     private static Member memberSample = Member.builder().id("id1")
             .passWord("pwd1").name("name1").phoneNumber("number1")
             .address("address1").email("email1").build();
+    private static DeleteMember deleteMember = DeleteMember.builder().id("id1").passWord("pwd1").build();
 
     // Member API Init
     private static MemberDB memberDB = new MemberDB();
@@ -44,7 +46,7 @@ public class MemberAPITest {
             System.out.println(memberController.registerMember(memberSample));
         }
         catch (RuntimeException e){
-            System.out.println(e.getMessage());
+            printExceptionMessage(e);
         }
         finally {
             System.out.println();
@@ -65,7 +67,7 @@ public class MemberAPITest {
             System.out.println(memberController.loginMember(loginMemberSample));
         }
         catch (RuntimeException e){
-            System.out.println(e.getMessage());
+            printExceptionMessage(e);
         }
         finally {
             System.out.println();
@@ -79,7 +81,7 @@ public class MemberAPITest {
             System.out.println(memberController.loginMember(loginMemberSample));
         }
         catch (RuntimeException e){
-            System.out.println(e.getMessage());
+            printExceptionMessage(e);
         }
         finally {
             System.out.println();
@@ -90,5 +92,9 @@ public class MemberAPITest {
         System.out.println("Test Method : Update Member Success");
         System.out.println(memberController.updateMember(memberSample));
         System.out.println();
+    }
+
+    public static void printExceptionMessage(Exception e){
+        System.out.println(e.getMessage());
     }
 }

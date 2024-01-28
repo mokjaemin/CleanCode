@@ -1,46 +1,49 @@
 Controller/ReservationController.java
  Controller.ReservationController
-Util/JwtUtil.java
- Util.JwtUtil
+Controller/MemberController.java
+ Controller.MemberController
 Controller/StoreController.java
  Controller.StoreController
 Controller/OwnerController.java
  Controller.OwnerController
 Exception/RegisteredIDException.java
  Exception.RegisteredIDException
+Data/DTO/Output/LoginedMemberToken.java
+ Data.DTO.Output.LoginedMemberToken
+ Data.DTO.Output.LoginedMemberToken$LoginedMemberTokenBuilder
 Controller/OrderController.java
  Controller.OrderController
 Controller/BoardController.java
  Controller.BoardController
-Controller/PayController.java
- Controller.PayController
-Exception/NoRegisteredIDException.java
- Exception.NoRegisteredIDException
+Service/Impl/MemberServiceImpl.java
+ Service.Impl.MemberServiceImpl
+DataBase/MemberDB.java
+ DataBase.MemberDB
 Data/DTO/Input/Member.java
  Data.DTO.Input.Member
  Data.DTO.Input.Member$MemberBuilder
+DAO/MemberDAO.java
+ DAO.MemberDAO
 Main.java
  Main
-Data/DTO/Output/LoginedMemberToken.java
- Data.DTO.Output.LoginedMemberToken
- Data.DTO.Output.LoginedMemberToken$LoginedMemberTokenBuilder
-Data/DTO/Input/LoginMember.java
- Data.DTO.Input.LoginMember
- Data.DTO.Input.LoginMember$LoginMemberBuilder
+Util/JwtUtil.java
+ Util.JwtUtil
+Exception/InvalidPassWordException.java
+ Exception.InvalidPassWordException
+DAO/Impl/MemberDAOImpl.java
+ DAO.Impl.MemberDAOImpl
+Service/MemberService.java
+ Service.MemberService
 Data/Entity/MemberEntity.java
  Data.Entity.MemberEntity
  Data.Entity.MemberEntity$MemberEntityBuilder
-Exception/InvalidPassWordException.java
- Exception.InvalidPassWordException
-DAO/MemberDAO.java
- DAO.MemberDAO
-Controller/MemberController.java
- Controller.MemberController
-Service/Impl/MemberServiceImpl.java
- Service.Impl.MemberServiceImpl
-Service/MemberService.java
- Service.MemberService
-DAO/Impl/MemberDAOImpl.java
- DAO.Impl.MemberDAOImpl
-DataBase/MemberDB.java
- DataBase.MemberDB
+Exception/NoRegisteredIDException.java
+ Exception.NoRegisteredIDException
+Data/DTO/Input/LoginMember.java
+ Data.DTO.Input.LoginMember
+ Data.DTO.Input.LoginMember$LoginMemberBuilder
+Data/DTO/Input/DeleteMember.java
+ Data.DTO.Input.DeleteMember
+ Data.DTO.Input.DeleteMember$DeleteMemberBuilder
+Controller/PayController.java
+ Controller.PayController

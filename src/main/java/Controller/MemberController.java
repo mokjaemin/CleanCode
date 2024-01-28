@@ -1,5 +1,6 @@
 package Controller;
 
+import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
 import Data.DTO.Input.Member;
 import Data.DTO.Output.LoginedMemberToken;
@@ -16,8 +17,8 @@ public class MemberController {
 
     public String registerMember(Member member){
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
-        String registerMemberResult = memberService.registerMemberEntity(memberEntity);
-        return registerMemberResult;
+        memberService.registerMemberEntity(memberEntity);
+        return "success";
     }
 
     public LoginedMemberToken loginMember(LoginMember loginMember){
@@ -27,8 +28,13 @@ public class MemberController {
 
     public String updateMember(Member member){
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
-        String updateMemberEntityResult = memberService.updateMemberEntity(memberEntity);
-        return updateMemberEntityResult;
+        memberService.updateMemberEntity(memberEntity);
+        return "success";
+    }
+
+    public String deleteMember(DeleteMember deleteMember){
+        memberService.deleteMember(deleteMember);
+        return "success";
     }
 
 }

@@ -1,8 +1,8 @@
 package Service.Impl;
 
 import DAO.MemberDAO;
+import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
-import Data.DTO.Input.Member;
 import Data.DTO.Output.LoginedMemberToken;
 import Data.Entity.MemberEntity;
 import Service.MemberService;
@@ -17,13 +17,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String registerMemberEntity(MemberEntity memberEntity) {
-        if(memberDAO.isMemberRegisterValid(memberEntity)){
-            return "success";
-        }
-        else{
-            throw new RuntimeException("회원가입 중 서버 오류 발생");
-        }
+    public void registerMemberEntity(MemberEntity memberEntity) {
+        memberDAO.isMemberRegisterValid(memberEntity);
     }
 
     @Override
@@ -32,13 +27,19 @@ public class MemberServiceImpl implements MemberService {
             return JwtUtil.getLoginedMemberToken();
         }
         else{
-            throw new RuntimeException("로그인 중 서버 오류 발생");
+            throw new RuntimeException("로그인 오류");
         }
     }
 
     @Override
-    public String updateMemberEntity(MemberEntity memberEntity) {
-        String updateMemebrEntityResult = memberDAO.updateMemberEntity(memberEntity);
-        return updateMemebrEntityResult;
+    public void updateMemberEntity(MemberEntity memberEntity) {
+        memberDAO.updateMemberEntity(memberEntity);
     }
+
+    @Override
+    public void deleteMember(DeleteMember deleteMember) {
+        memberDAO.deleteMember(deleteMember);
+    }
+
+
 }

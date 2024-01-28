@@ -1,6 +1,7 @@
 package DAO.Impl;
 
 import DAO.MemberDAO;
+import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
 import Data.Entity.MemberEntity;
 import DataBase.MemberDB;
@@ -46,6 +47,14 @@ public class MemberDAOImpl implements MemberDAO {
         MemberDB.removeMemberEntityByID(memberEntity.getId());
         MemberDB.registerMemberEntity(memberEntity);
         return "success";
+    }
+
+    @Override
+    public void deleteMember(DeleteMember deleteMember) {
+        if(!memberDB.isDeleteMemberValid(deleteMember)){
+            throw new InvalidPassWordException();
+        }
+        MemberDB.removeMemberEntityByID(deleteMember.getId());
     }
 
 

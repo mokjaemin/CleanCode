@@ -1,6 +1,8 @@
 package DataBase;
 
+import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
+import Data.DTO.Input.Member;
 import Data.Entity.MemberEntity;
 
 import java.util.ArrayList;
@@ -46,4 +48,13 @@ public class MemberDB {
         }
     }
 
+    public static boolean isDeleteMemberValid(DeleteMember deleteMember){
+        for(MemberEntity memberEntity : memberEntities){
+            if(memberEntity.getId().equals(deleteMember.getId())
+                    && memberEntity.getPassWord().equals(deleteMember.getPassWord())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
