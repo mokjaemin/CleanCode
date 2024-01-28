@@ -1,7 +1,8 @@
 Controller/ReservationController.java
  Controller.ReservationController
-Controller/MemberController.java
- Controller.MemberController
+Data/DTO/Input/DeleteMember.java
+ Data.DTO.Input.DeleteMember
+ Data.DTO.Input.DeleteMember$DeleteMemberBuilder
 Controller/StoreController.java
  Controller.StoreController
 Controller/OwnerController.java
@@ -15,35 +16,36 @@ Controller/OrderController.java
  Controller.OrderController
 Controller/BoardController.java
  Controller.BoardController
-Service/Impl/MemberServiceImpl.java
- Service.Impl.MemberServiceImpl
-DataBase/MemberDB.java
- DataBase.MemberDB
+Data/Entity/MemberEntity.java
+ Data.Entity.MemberEntity
+ Data.Entity.MemberEntity$MemberEntityBuilder
+Exception/NoRegisteredIDException.java
+ Exception.NoRegisteredIDException
 Data/DTO/Input/Member.java
  Data.DTO.Input.Member
  Data.DTO.Input.Member$MemberBuilder
-DAO/MemberDAO.java
- DAO.MemberDAO
+Controller/PayController.java
+ Controller.PayController
 Main.java
  Main
 Util/JwtUtil.java
  Util.JwtUtil
 Exception/InvalidPassWordException.java
  Exception.InvalidPassWordException
+Data/DTO/Input/LoginMember.java
+ Data.DTO.Input.LoginMember
+ Data.DTO.Input.LoginMember$LoginMemberBuilder
+DAO/MemberDAO.java
+ DAO.MemberDAO
+DataBase/MemberDB.java
+ DataBase.MemberDB
 DAO/Impl/MemberDAOImpl.java
  DAO.Impl.MemberDAOImpl
 Service/MemberService.java
  Service.MemberService
-Data/Entity/MemberEntity.java
- Data.Entity.MemberEntity
- Data.Entity.MemberEntity$MemberEntityBuilder
-Exception/NoRegisteredIDException.java
- Exception.NoRegisteredIDException
-Data/DTO/Input/LoginMember.java
- Data.DTO.Input.LoginMember
- Data.DTO.Input.LoginMember$LoginMemberBuilder
-Data/DTO/Input/DeleteMember.java
- Data.DTO.Input.DeleteMember
- Data.DTO.Input.DeleteMember$DeleteMemberBuilder
-Controller/PayController.java
- Controller.PayController
+Service/Impl/MemberServiceImpl.java
+ Service.Impl.MemberServiceImpl
+Controller/MemberController.java
+ Controller.MemberController
+Exception/NoMemberEntityInCondition.java
+ Exception.NoMemberEntityInCondition

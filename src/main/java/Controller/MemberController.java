@@ -6,6 +6,9 @@ import Data.DTO.Input.Member;
 import Data.DTO.Output.LoginedMemberToken;
 import Data.Entity.MemberEntity;
 import Service.MemberService;
+import Exception.NoMemberEntityInCondition;
+
+import java.util.List;
 
 public class MemberController {
 
@@ -36,5 +39,14 @@ public class MemberController {
         memberService.deleteMember(deleteMember);
         return "success";
     }
+
+    public List<MemberEntity> searchMemberEntitiesByMember(Member member){
+        List<MemberEntity> searchedMemberEntities = memberService.searchMemberEntitiesByMember(member);
+        if(searchedMemberEntities.size() == 0){
+            throw new NoMemberEntityInCondition();
+        }
+        return searchedMemberEntities;
+    }
+
 
 }

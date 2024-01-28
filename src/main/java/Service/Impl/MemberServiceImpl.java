@@ -3,10 +3,13 @@ package Service.Impl;
 import DAO.MemberDAO;
 import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
+import Data.DTO.Input.Member;
 import Data.DTO.Output.LoginedMemberToken;
 import Data.Entity.MemberEntity;
 import Service.MemberService;
 import Util.JwtUtil;
+
+import java.util.List;
 
 public class MemberServiceImpl implements MemberService {
 
@@ -39,6 +42,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void deleteMember(DeleteMember deleteMember) {
         memberDAO.deleteMember(deleteMember);
+    }
+
+    @Override
+    public List<MemberEntity> searchMemberEntitiesByMember(Member member) {
+        return memberDAO.searchMemberEntitiesByMember(member);
     }
 
 

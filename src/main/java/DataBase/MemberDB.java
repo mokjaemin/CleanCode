@@ -57,4 +57,27 @@ public class MemberDB {
         }
         return false;
     }
+
+    public List<MemberEntity> searchMemberEntitiesByMember(Member member){
+        List<MemberEntity> result = new ArrayList<>();
+        for(MemberEntity memberEntity : memberEntities){
+            if(!memberEntity.getId().equals(member.getId())){
+                continue;
+            }
+            if(!memberEntity.getAddress().equals(member.getAddress())){
+                continue;
+            }
+            if(!memberEntity.getEmail().equals(member.getEmail())){
+                continue;
+            }
+            if(!memberEntity.getName().equals(member.getName())){
+                continue;
+            }
+            if(!memberEntity.getPhoneNumber().equals(member.getPhoneNumber())){
+                continue;
+            }
+            result.add(memberEntity);
+        }
+        return result;
+    }
 }

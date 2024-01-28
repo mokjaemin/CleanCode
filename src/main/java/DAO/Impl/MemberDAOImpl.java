@@ -3,11 +3,14 @@ package DAO.Impl;
 import DAO.MemberDAO;
 import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
+import Data.DTO.Input.Member;
 import Data.Entity.MemberEntity;
 import DataBase.MemberDB;
 import Exception.RegisteredIDException;
 import Exception.NoRegisteredIDException;
 import Exception.InvalidPassWordException;
+
+import java.util.List;
 
 public class MemberDAOImpl implements MemberDAO {
 
@@ -55,6 +58,11 @@ public class MemberDAOImpl implements MemberDAO {
             throw new InvalidPassWordException();
         }
         MemberDB.removeMemberEntityByID(deleteMember.getId());
+    }
+
+    @Override
+    public List<MemberEntity> searchMemberEntitiesByMember(Member member) {
+        return memberDB.searchMemberEntitiesByMember(member);
     }
 
 
