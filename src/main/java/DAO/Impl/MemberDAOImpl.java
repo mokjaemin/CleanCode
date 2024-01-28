@@ -25,10 +25,11 @@ public class MemberDAOImpl implements MemberDAO {
         if(memberDB.isIDRegistered(memberEntity.getId())){
             throw new RegisteredIDException();
         }
-        else{
-            memberDB.registerMemberEntity(memberEntity);
-            return true;
-        }
+        return true;
+    }
+
+    public void registerMemberEntity(MemberEntity memberEntity){
+        memberDB.registerMemberEntity(memberEntity);
     }
 
     @Override

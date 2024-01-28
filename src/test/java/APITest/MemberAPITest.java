@@ -30,15 +30,15 @@ public class MemberAPITest {
     // Test Main
     public static void main(String[] args) {
         RegisterMemberSuccess();
-        RegisterMemberFail_ExistedID();
+        RegisterMemberFail_RegisteredIDException();
         LoginMemberSuccess();
-        LoginMemberFail_NoExistedID();
-        LoginMemberFail_WrongPassword();
+        LoginMemberFail_NoRegisteredIDException();
+        LoginMemberFail_InvalidPasswordException();
         UpdateMemberSuccess();
         DeleteMemberSuccess();
-        DeleteMemberFail_WrongPassword();
+        DeleteMemberFail_InvalidPasswordException();
         SearchMemberEntitySuccess();
-        SearchMemberEntityFail_NoInformation();
+        SearchMemberEntityFail_NoMemberEntityInCondition();
     }
 
     public static void RegisterMemberSuccess(){
@@ -47,8 +47,8 @@ public class MemberAPITest {
         System.out.println();
     }
 
-    public static void RegisterMemberFail_ExistedID(){
-        System.out.println("Test Method : Register Member Fail : Existed ID");
+    public static void RegisterMemberFail_RegisteredIDException(){
+        System.out.println("Test Method : Register Member Fail : RegisteredIDException");
         try{
             System.out.println(memberController.registerMember(memberSample));
         }
@@ -67,8 +67,8 @@ public class MemberAPITest {
         System.out.println();
     }
 
-    public static void LoginMemberFail_NoExistedID(){
-        System.out.println("Test Method : Login Member Fail : No Exited ID");
+    public static void LoginMemberFail_NoRegisteredIDException(){
+        System.out.println("Test Method : Login Member Fail : NoRegisteredIDException");
         try {
             LoginMember loginMemberSample = LoginMember.builder().id("WrongID").passWord(memberSample.getPassWord()).build();
             System.out.println(memberController.loginMember(loginMemberSample));
@@ -81,8 +81,8 @@ public class MemberAPITest {
         }
     }
 
-    public static void LoginMemberFail_WrongPassword(){
-        System.out.println("Test Method : Login Member Fail : Wrong Password");
+    public static void LoginMemberFail_InvalidPasswordException(){
+        System.out.println("Test Method : Login Member Fail : InvalidPasswordException");
         try{
             LoginMember loginMemberSample = LoginMember.builder().id(memberSample.getId()).passWord("WrongPWD").build();
             System.out.println(memberController.loginMember(loginMemberSample));
@@ -109,8 +109,8 @@ public class MemberAPITest {
         System.out.println();
     }
 
-    public static void DeleteMemberFail_WrongPassword(){
-        System.out.println("Test Method : Delete Member Fail : Wrong Password");
+    public static void DeleteMemberFail_InvalidPasswordException(){
+        System.out.println("Test Method : Delete Member Fail : InvalidPasswordException");
         try{
             DeleteMember wrongDeleteMember = DeleteMember.builder().id("id1").passWord("pwd2").build();
             System.out.println(memberController.deleteMember(wrongDeleteMember));
@@ -129,8 +129,8 @@ public class MemberAPITest {
         System.out.println();
     }
 
-    public static void SearchMemberEntityFail_NoInformation(){
-        System.out.println("Test Method : Search MemberEntity Fail : No Information");
+    public static void SearchMemberEntityFail_NoMemberEntityInCondition(){
+        System.out.println("Test Method : Search MemberEntity Fail : NoMemberEntityInCondition");
         String originalId = memberSample.getId();
         try{
             memberSample.setId(null);

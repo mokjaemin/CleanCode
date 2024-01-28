@@ -21,7 +21,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void registerMemberEntity(MemberEntity memberEntity) {
-        memberDAO.isMemberRegisterValid(memberEntity);
+        if(memberDAO.isMemberRegisterValid(memberEntity)){
+            memberDAO.registerMemberEntity(memberEntity);
+        }
     }
 
     @Override

@@ -10,6 +10,7 @@ import java.util.List;
 public interface MemberDAO {
 
     boolean isMemberRegisterValid(MemberEntity memberEntity);
+    void registerMemberEntity(MemberEntity memberEntity);
     boolean isMemberLoginValid(LoginMember loginMember);
     String updateMemberEntity(MemberEntity memberEntity);
     void deleteMember(DeleteMember deleteMember);
