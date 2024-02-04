@@ -1,2 +1,4 @@
+APITest/StoreAPITest.java
+ APITest.StoreAPITest
 APITest/MemberAPITest.java
  APITest.MemberAPITest

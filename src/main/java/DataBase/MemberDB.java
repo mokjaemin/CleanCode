@@ -58,7 +58,7 @@ public class MemberDB {
         return false;
     }
 
-    public List<MemberEntity> searchMemberEntitiesByMember(Member member){
+    public static List<MemberEntity> searchMemberEntitiesByMember(Member member){
         List<MemberEntity> result = new ArrayList<>();
         for(MemberEntity memberEntity : memberEntities){
             if(!memberEntity.getId().equals(member.getId())){
