@@ -1,4 +1,10 @@
+UnitTest/Member/MemberStore.java
+ UnitTest.Member.MemberStore
 APITest/StoreAPITest.java
  APITest.StoreAPITest
+UnitTest/Member/MemberDAO.java
+ UnitTest.Member.MemberDAO
 APITest/MemberAPITest.java
  APITest.MemberAPITest
+UnitTest/Member/MemberContollerTest.java
+ UnitTest.Member.MemberContollerTest

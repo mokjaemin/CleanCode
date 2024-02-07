@@ -273,8 +273,8 @@ public class MemberAPITest {
         return false;
     }
 
-    public static void thenErrorMessageShouldBeEquals(String expectedMessage, String givenMessage){
-        assertEquals(expectedMessage, givenMessage);
+    public static void thenErrorMessageShouldBeEquals(String originalErrorMessage, String receivedErrorMessage){
+        assertEquals(originalErrorMessage, receivedErrorMessage);
     }
 
 
