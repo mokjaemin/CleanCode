@@ -1,10 +1,10 @@
-UnitTest/Member/MemberStore.java
- UnitTest.Member.MemberStore
-APITest/StoreAPITest.java
- APITest.StoreAPITest
-UnitTest/Member/MemberDAO.java
- UnitTest.Member.MemberDAO
 APITest/MemberAPITest.java
  APITest.MemberAPITest
+APITest/StoreAPITest.java
+ APITest.StoreAPITest
+UnitTest/Member/MemberDAOTest.java
+ UnitTest.Member.MemberDAOTest
 UnitTest/Member/MemberContollerTest.java
  UnitTest.Member.MemberContollerTest
+UnitTest/Member/MemberServiceTest.java
+ UnitTest.Member.MemberServiceTest

@@ -98,7 +98,7 @@ public class MemberContollerTest {
 
         try{
             // when
-            List<MemberEntity> response = memberController.searchMemberEntitiesByMember(member);
+            memberController.searchMemberEntitiesByMember(member);
         }
         catch (RuntimeException e){
             // Then
