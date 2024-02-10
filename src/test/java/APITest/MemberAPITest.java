@@ -8,9 +8,10 @@ import Data.DTO.Input.LoginMember;
 import Data.DTO.Input.Member;
 import Data.DTO.Output.LoginedMemberToken;
 import Data.Entity.MemberEntity;
-import DataBase.MemberDB;
+import DataBase.Impl.MemberDBImpl;
 import Service.Impl.MemberServiceImpl;
 import Service.MemberService;
+import TestUtil.MemberTestUtil;
 import org.junit.jupiter.api.Test;
 import Exception.RegisteredIDException;
 import Exception.NoRegisteredIDException;
@@ -25,7 +26,7 @@ public class MemberAPITest {
 
 
     // Member API Init
-    private static MemberDB memberDB = new MemberDB();
+    private static MemberDBImpl memberDB = new MemberDBImpl();
     private static MemberDAO memberDAO = new MemberDAOImpl(memberDB);
     private static MemberService memberService = new MemberServiceImpl(memberDAO);
     private static MemberController memberController = new MemberController(memberService);
@@ -39,7 +40,7 @@ public class MemberAPITest {
     @Test
     public void registerMemeberSuccess(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
 
         // When
         memberController.registerMember(member);
@@ -55,7 +56,7 @@ public class MemberAPITest {
     @Test
     public void registerMemeberFail_RegisteredIDException(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
 
         try{
@@ -64,7 +65,7 @@ public class MemberAPITest {
         }
         catch (RuntimeException e){
             // Then
-            thenErrorMessageShouldBeEquals(RegisteredIDException.message, e.getMessage());
+            MemberTestUtil.thenErrorMessageShouldBeEquals(RegisteredIDException.message, e.getMessage());
         }
         finally {
             // Init
@@ -75,7 +76,7 @@ public class MemberAPITest {
     @Test
     public void loginMemberSueccess(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
         LoginMember loginMember = givenLoginMemberByMember(member);
 
@@ -92,7 +93,7 @@ public class MemberAPITest {
     @Test
     public void loginMemberFail_NoRegisteredIDException(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
         LoginMember loginMember = givenLoginMemberByMember(member);
         loginMember.setId("WrongID");
@@ -103,7 +104,7 @@ public class MemberAPITest {
         }
         catch (RuntimeException e){
             // Then
-            thenErrorMessageShouldBeEquals(NoRegisteredIDException.message, e.getMessage());
+            MemberTestUtil.thenErrorMessageShouldBeEquals(NoRegisteredIDException.message, e.getMessage());
         }
         finally {
             // Init
@@ -114,7 +115,7 @@ public class MemberAPITest {
     @Test
     public void loginMemberFail_InvalidPassWordException(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
         LoginMember loginMember = givenLoginMemberByMember(member);
         loginMember.setPassWord("WrongPassword");
@@ -125,7 +126,7 @@ public class MemberAPITest {
         }
         catch (RuntimeException e){
             // Then
-            thenErrorMessageShouldBeEquals(InvalidPassWordException.message, e.getMessage());
+            MemberTestUtil.thenErrorMessageShouldBeEquals(InvalidPassWordException.message, e.getMessage());
         }
         finally {
             // Init
@@ -136,7 +137,7 @@ public class MemberAPITest {
     @Test
     public void updateMemberSuccess(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
         String changedName = "Changed Name";
         Member changedMember = changeMemberName(member, changedName);
@@ -155,7 +156,7 @@ public class MemberAPITest {
     @Test
     public void DeleteMemberSuccess(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
         DeleteMember deleteMember = givenDeleteMemberByMember(member);
 
@@ -170,7 +171,7 @@ public class MemberAPITest {
     @Test
     public void DeleteMemberFail_InvalidPassWordException(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
         DeleteMember deleteMember = givenDeleteMemberByMember(member);
         String wrodPwd = "Wrong Pwd";
@@ -181,7 +182,7 @@ public class MemberAPITest {
             String response = memberController.deleteMember(deleteMember);
         }
         catch (RuntimeException e){
-            thenErrorMessageShouldBeEquals(InvalidPassWordException.message, e.getMessage());
+            MemberTestUtil.thenErrorMessageShouldBeEquals(InvalidPassWordException.message, e.getMessage());
         }
         finally {
             // init
@@ -192,7 +193,7 @@ public class MemberAPITest {
     @Test
     public void SearchMemberSuccess(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
 
         // When
@@ -208,7 +209,7 @@ public class MemberAPITest {
     @Test
     public void SearchMemberFail_NoMemberEntityInCondition(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         givenMemberRegisteredAndCheckValid(member);
         String originalId = member.getId();
         member.setId("Wrong ID");
@@ -219,7 +220,7 @@ public class MemberAPITest {
         }
         catch (RuntimeException e){
             // Then
-            thenErrorMessageShouldBeEquals(NoMemberEntityInCondition.message, e.getMessage());
+            MemberTestUtil.thenErrorMessageShouldBeEquals(NoMemberEntityInCondition.message, e.getMessage());
         }
         finally {
             // Init
@@ -231,40 +232,36 @@ public class MemberAPITest {
 
 
     // Given Method
-    public static Member givenMember(){
-        return Member.builder().id("id").passWord("pwd").name("name").email("email")
-                .address("address").phoneNumber("phoneNumber").build();
-    }
 
-    public static LoginMember givenLoginMemberByMember(Member member){
+    private static LoginMember givenLoginMemberByMember(Member member){
         return LoginMember.builder().id(member.getId()).passWord(member.getPassWord()).build();
     }
 
-    public static DeleteMember givenDeleteMemberByMember(Member member){
+    private static DeleteMember givenDeleteMemberByMember(Member member){
         return DeleteMember.builder().id(member.getId()).passWord(member.getPassWord()).build();
     }
 
-    public static void givenMemberRegisteredAndCheckValid(Member member){
+    private static void givenMemberRegisteredAndCheckValid(Member member){
         memberController.registerMember(member);
         thenCheckMemberRegisteredById(member.getId());
     }
 
-    public static Member changeMemberName(Member member, String name){
+    private static Member changeMemberName(Member member, String name){
         member.setName(name);
         return member;
     }
 
 
     // Then Method
-    public static void thenCheckMemberRegisteredById(String id){
+    private static void thenCheckMemberRegisteredById(String id){
         assert memberDB.isIDRegistered(id);
     }
 
-    public static void thenCheckMemberDeletedById(String id){
+    private static void thenCheckMemberDeletedById(String id){
         assert !memberDB.isIDRegistered(id);
     }
 
-    public static boolean thenMemberEntitiesHaveThisMember(List<MemberEntity> memberEntities, Member member){
+    private static boolean thenMemberEntitiesHaveThisMember(List<MemberEntity> memberEntities, Member member){
         for(MemberEntity memberEntity : memberEntities){
             if(memberEntity.getId().equals(member.getId())){
                 return true;
@@ -273,14 +270,10 @@ public class MemberAPITest {
         return false;
     }
 
-    public static void thenErrorMessageShouldBeEquals(String originalErrorMessage, String receivedErrorMessage){
-        assertEquals(originalErrorMessage, receivedErrorMessage);
-    }
-
 
 
     // Init Method
-    public static void initMemberDBByRegisteredId(String id){
+    private static void initMemberDBByRegisteredId(String id){
         memberDB.removeMemberEntityByID(id);
     }
 

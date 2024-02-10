@@ -5,6 +5,7 @@ import Data.DTO.Input.DeleteMember;
 import Data.DTO.Input.LoginMember;
 import Data.DTO.Input.Member;
 import Data.Entity.MemberEntity;
+import DataBase.Impl.MemberDBImpl;
 import DataBase.MemberDB;
 import Exception.RegisteredIDException;
 import Exception.NoRegisteredIDException;
@@ -48,8 +49,8 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public String updateMemberEntity(MemberEntity memberEntity) {
-        MemberDB.removeMemberEntityByID(memberEntity.getId());
-        MemberDB.registerMemberEntity(memberEntity);
+        memberDB.removeMemberEntityByID(memberEntity.getId());
+        memberDB.registerMemberEntity(memberEntity);
         return "success";
     }
 
@@ -58,7 +59,7 @@ public class MemberDAOImpl implements MemberDAO {
         if(!memberDB.isDeleteMemberValid(deleteMember)){
             throw new InvalidPassWordException();
         }
-        MemberDB.removeMemberEntityByID(deleteMember.getId());
+        memberDB.removeMemberEntityByID(deleteMember.getId());
     }
 
     @Override

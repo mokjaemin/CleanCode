@@ -1,10 +1,12 @@
+TestUtil/MemberTestUtil.java
+ TestUtil.MemberTestUtil
+UnitTest/Member/MemberServiceTest.java
+ UnitTest.Member.MemberServiceTest
 APITest/MemberAPITest.java
  APITest.MemberAPITest
 APITest/StoreAPITest.java
  APITest.StoreAPITest
-UnitTest/Member/MemberDAOTest.java
- UnitTest.Member.MemberDAOTest
 UnitTest/Member/MemberContollerTest.java
  UnitTest.Member.MemberContollerTest
-UnitTest/Member/MemberServiceTest.java
- UnitTest.Member.MemberServiceTest
+UnitTest/Member/MemberDAOTest.java
+ UnitTest.Member.MemberDAOTest

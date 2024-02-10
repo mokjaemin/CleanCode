@@ -8,6 +8,7 @@ import Data.DTO.Output.LoginedMemberToken;
 import Data.Entity.MemberEntity;
 import Service.Impl.MemberServiceImpl;
 import Service.MemberService;
+import TestUtil.MemberTestUtil;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 import Exception.*;
@@ -24,7 +25,7 @@ public class MemberContollerTest {
     @Test
     public void registerMemberSuccessTest(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
 
         // when
         String response = memberController.registerMember(member);
@@ -36,8 +37,8 @@ public class MemberContollerTest {
     @Test
     public void loginMemberSuccessTest(){
         // Given
-        LoginMember loginMember = givenLoginMember();
-        LoginedMemberToken loginedMemberToken = givenLoginedMemberToken();
+        LoginMember loginMember = MemberTestUtil.givenLoginMember();
+        LoginedMemberToken loginedMemberToken = MemberTestUtil.givenLoginedMemberToken();
         when(memberService.createLoginMemberToken(loginMember)).thenReturn(loginedMemberToken);
 
         // When
@@ -51,7 +52,7 @@ public class MemberContollerTest {
     @Test
     public void updateMemberSuccessTest(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
 
         // when
         String response = memberController.updateMember(member);
@@ -63,7 +64,7 @@ public class MemberContollerTest {
     @Test
     public void deleteMemberSuccessTest(){
         // Given
-        DeleteMember deleteMember = givenDeleteMember();
+        DeleteMember deleteMember = MemberTestUtil.givenDeleteMember();
 
         // when
         String response = memberController.deleteMember(deleteMember);
@@ -75,7 +76,7 @@ public class MemberContollerTest {
     @Test
     public void searchMemberSuccessTest(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         List<MemberEntity> memberEntities = new ArrayList<>();
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
         memberEntities.add(memberEntity);
@@ -91,7 +92,7 @@ public class MemberContollerTest {
     @Test
     public void searchMemberFailTest_NoMemberEntityInCondition(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         List<MemberEntity> emptyList = Collections.emptyList();
         when(memberService.searchMemberEntitiesByMember(member)).thenReturn(emptyList);
 
@@ -102,32 +103,9 @@ public class MemberContollerTest {
         }
         catch (RuntimeException e){
             // Then
-            thenErrorMessageShouldBeEquals(NoMemberEntityInCondition.message, e.getMessage());
+            MemberTestUtil.thenErrorMessageShouldBeEquals(NoMemberEntityInCondition.message, e.getMessage());
         }
     }
 
-
-
-
-    public static Member givenMember(){
-        return Member.builder().id("id").passWord("pwd").name("name").email("email")
-                .address("address").phoneNumber("phoneNumber").build();
-    }
-
-    public static LoginMember givenLoginMember(){
-        return LoginMember.builder().id("id").passWord("pwd").build();
-    }
-
-    public static LoginedMemberToken givenLoginedMemberToken(){
-        return LoginedMemberToken.builder().build();
-    }
-
-    public static DeleteMember givenDeleteMember(){
-        return DeleteMember.builder().build();
-    }
-
-    public static void thenErrorMessageShouldBeEquals(String originalErrorMessage, String receivedErrorMessage){
-        assertEquals(originalErrorMessage, receivedErrorMessage);
-    }
 
 }

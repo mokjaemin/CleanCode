@@ -2,14 +2,14 @@ Service/StoreService.java
  Service.StoreService
 Controller/ReservationController.java
  Controller.ReservationController
-DataBase/StoreDB.java
- DataBase.StoreDB
+DataBase/MemberDB.java
+ DataBase.MemberDB
 Controller/PayController.java
  Controller.PayController
 Controller/StoreRestDaysController.java
  Controller.StoreRestDaysController
-DataBase/StoreRestDaysDB.java
- DataBase.StoreRestDaysDB
+DAO/Impl/MemberDAOImpl.java
+ DAO.Impl.MemberDAOImpl
 Data/DTO/Output/LoginedMemberToken.java
  Data.DTO.Output.LoginedMemberToken
  Data.DTO.Output.LoginedMemberToken$LoginedMemberTokenBuilder
@@ -29,28 +29,28 @@ Data/DTO/Input/LoginMember.java
  Data.DTO.Input.LoginMember$LoginMemberBuilder
 Controller/StoreFoodController.java
  Controller.StoreFoodController
-DataBase/StoreTableDB.java
- DataBase.StoreTableDB
-DataBase/StoreTimeDB.java
- DataBase.StoreTimeDB
+Exception/RegisteredIDException.java
+ Exception.RegisteredIDException
+Exception/NoRegisteredIDException.java
+ Exception.NoRegisteredIDException
 Controller/StoreController.java
  Controller.StoreController
-DataBase/StoreFoodDB.java
- DataBase.StoreFoodDB
+DataBase/Impl/MemberDBImpl.java
+ DataBase.Impl.MemberDBImpl
 Service/Impl/StoreServiceImpl.java
  Service.Impl.StoreServiceImpl
 DAO/StoreDAO.java
  DAO.StoreDAO
 Controller/OrderController.java
  Controller.OrderController
-DAO/Impl/StoreDAOImpl.java
- DAO.Impl.StoreDAOImpl
+Exception/InvalidPassWordException.java
+ Exception.InvalidPassWordException
 Controller/BoardController.java
  Controller.BoardController
 Service/Impl/MemberServiceImpl.java
  Service.Impl.MemberServiceImpl
-DataBase/MemberDB.java
- DataBase.MemberDB
+Exception/NoMemberEntityInCondition.java
+ Exception.NoMemberEntityInCondition
 Util/JwtUtil.java
  Util.JwtUtil
 Controller/StoreTimeController.java
@@ -63,13 +63,15 @@ Data/Entity/MemberEntity.java
  Data.Entity.MemberEntity$MemberEntityBuilder
 Controller/MemberController.java
  Controller.MemberController
-Exception/InvalidPassWordException.java
- Exception.InvalidPassWordException
-DAO/Impl/MemberDAOImpl.java
- DAO.Impl.MemberDAOImpl
-Exception/RegisteredIDException.java
- Exception.RegisteredIDException
-Exception/NoMemberEntityInCondition.java
- Exception.NoMemberEntityInCondition
-Exception/NoRegisteredIDException.java
- Exception.NoRegisteredIDException
+DataBase/Impl/StoreTimeDBImpl.java
+ DataBase.Impl.StoreTimeDBImpl
+DataBase/Impl/StoreRestDaysDBImpl.java
+ DataBase.Impl.StoreRestDaysDBImpl
+DataBase/Impl/StoreDBImpl.java
+ DataBase.Impl.StoreDBImpl
+DataBase/Impl/StoreFoodDBImpl.java
+ DataBase.Impl.StoreFoodDBImpl
+DAO/Impl/StoreDAOImpl.java
+ DAO.Impl.StoreDAOImpl
+DataBase/Impl/StoreTableDBImpl.java
+ DataBase.Impl.StoreTableDBImpl

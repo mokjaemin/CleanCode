@@ -8,13 +8,10 @@ import Data.DTO.Output.LoginedMemberToken;
 import Data.Entity.MemberEntity;
 import Service.Impl.MemberServiceImpl;
 import Service.MemberService;
+import TestUtil.MemberTestUtil;
 import org.junit.jupiter.api.Test;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class MemberServiceTest {
@@ -25,7 +22,7 @@ public class MemberServiceTest {
     @Test
     public void registerMemberSuccessTest(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
         when(memberDAO.isMemberRegisterValid(memberEntity)).thenReturn(true);
 
@@ -39,7 +36,7 @@ public class MemberServiceTest {
     @Test
     public void registerMemberFailTest_RegisteredIDException(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
         when(memberDAO.isMemberRegisterValid(memberEntity)).thenReturn(false);
 
@@ -52,7 +49,7 @@ public class MemberServiceTest {
 
     @Test
     public void createLoginMemberTokenSuccessTest(){
-        LoginMember loginMember = givenLoginMember();
+        LoginMember loginMember = MemberTestUtil.givenLoginMember();
         when(memberDAO.isMemberLoginValid(loginMember)).thenReturn(true);
 
         LoginedMemberToken loginedMemberToken = memberService.createLoginMemberToken(loginMember);
@@ -62,46 +59,46 @@ public class MemberServiceTest {
 
     @Test
     public void createLoginMemberTokenFailTest(){
-        LoginMember loginMember = givenLoginMember();
+        LoginMember loginMember = MemberTestUtil.givenLoginMember();
         when(memberDAO.isMemberLoginValid(loginMember)).thenReturn(false);
 
         try {
             memberService.createLoginMemberToken(loginMember);
         }
         catch (RuntimeException e){
-            thenErrorMessageShouldBeEquals("로그인 오류", e.getMessage());
+            MemberTestUtil.thenErrorMessageShouldBeEquals("로그인 오류", e.getMessage());
         }
     }
 
     @Test
     public void updateMemberSuccessTest(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
 
         // when
         memberService.updateMemberEntity(memberEntity);
 
         // then
-        // - Non
+        verify(memberDAO, times(1)).updateMemberEntity(memberEntity);
     }
 
     @Test
     public void deleteMemberSuccessTest(){
         // Given
-        DeleteMember deleteMember = givenDeleteMember();
+        DeleteMember deleteMember = MemberTestUtil.givenDeleteMember();
 
         // when
         memberService.deleteMember(deleteMember);
 
         // then
-        // - Non
+        verify(memberDAO, times(1)).deleteMember(deleteMember);
     }
 
     @Test
     public void searchMemberSuccessTest(){
         // Given
-        Member member = givenMember();
+        Member member = MemberTestUtil.givenMember();
         List<MemberEntity> memberEntities = new ArrayList<>();
         MemberEntity memberEntity = MemberEntity.toMemberEntity(member);
         memberEntities.add(memberEntity);
@@ -114,23 +111,6 @@ public class MemberServiceTest {
         assert response.equals(memberEntities);
     }
 
-
-    public static Member givenMember(){
-        return Member.builder().id("id").passWord("pwd").name("name").email("email")
-                .address("address").phoneNumber("phoneNumber").build();
-    }
-
-    public static LoginMember givenLoginMember(){
-        return LoginMember.builder().id("id").passWord("pwd").build();
-    }
-
-    public static DeleteMember givenDeleteMember(){
-        return DeleteMember.builder().build();
-    }
-
-    public static void thenErrorMessageShouldBeEquals(String originalErrorMessage, String receivedErrorMessage){
-        assertEquals(originalErrorMessage, receivedErrorMessage);
-    }
 
 
 }
